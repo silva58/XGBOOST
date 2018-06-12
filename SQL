@@ -1,0 +1,27 @@
+Q: Merging two tables by choosing the CLOSEST dates
+date	     ticker
+12/12/2008	ABC
+4/6/2008	  ABC
+25/3/2010	  DEF
+6/2/2002	  DEF
+The Second file looks like this:
+
+End of year report	ticker              
+1/12/2010	           ABC
+1/12/2009	           ABC
+1/12/2008	           ABC
+1/12/2007	           ABC
+1/12/2006	           ABC
+
+proc sql;
+create table want as
+  select a.date,a.ticker, b.date as rpt_dt format=ddmmyy10.
+  from h1 a
+  left join
+  h2 b
+  on a.ticker=b.ticker
+  where b.date <= a.date
+  group by a.date,a.ticker
+  having abs(a.date-b.date)=min(abs(a.date-b.date))
+  order by a.ticker, b.date descending;
+quit;
