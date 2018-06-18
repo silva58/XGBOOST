@@ -1,0 +1,10 @@
+Q: Delete rows with blank values or NA in one particular column
+
+df[!(is.na(df$start_pc) | df$start_pc==""), ]
+
+Q: join in R
+
+Inner join	merge(df1, df2, by=”common_key_column”)
+Outer join	merge(df1, df2, by=”common_key_column”, all=TRUE)
+Left outer	merge(df1, df2, by=”common_key_column”, all.x=TRUE)
+Right outer	merge(df1, df2, by=”common_key_column”, all.y=TRUE)
