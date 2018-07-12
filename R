@@ -24,3 +24,6 @@ dt<- sqlQuery(ch,"SELECT EQP_INIT, EQP_NUMB, EVT_DT, EVT_TM, EVT_CD, EVST_CD, WB
               and EVST_CD IN ('DS', 'TE')
               and EVT_DT > '2018-04-10';")
              
+Q: deal with multi-column with same functions
+
+dt[,c(4,5,6,7)]<-lapply(dt[,c(4,5,6,7)],ymd_hms)
